@@ -48,6 +48,12 @@ resource "aws_subnet" "public" {
   }
 }
 
+resource "aws_vpc_peering_connection" "main" {
+  auto_accept = true
+  peer_vpc_id = aws_vpc.backend.id
+  vpc_id = aws_vpc.frontend.id
+}
+
 resource "aws_internet_gateway" "gw" {
   vpc_id = aws_vpc.frontend.id
 
